@@ -1,6 +1,5 @@
 
 def modulus(numerator, divisior):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
-    #TODO: remove 'pass' and implement functionality
     quotient = numerator / divisior
     product = int(quotient) * divisior
     result = numerator - product
@@ -8,12 +7,14 @@ def modulus(numerator, divisior):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
 
 
 def how_many(lis1, lis2):
-    #TODO: remove 'pass' and implement functionality
     result = 0
     for i in lis1:
         if i in lis2:
             result += 1
     return result
+
+    # result = sum(1 for i in list1 if i in list2)
+    # return result
 
 # FEEL FREE TO EDIT THE TESTS AND MAKE THEM BETTER
 # REMEMBER EDGE CASES!
