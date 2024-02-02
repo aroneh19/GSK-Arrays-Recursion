@@ -9,8 +9,11 @@ def modulus(numerator, divisior):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
 
 def how_many(lis1, lis2):
     #TODO: remove 'pass' and implement functionality
-    pass
-
+    result = 0
+    for i in lis1:
+        if i in lis2:
+            result += 1
+    return result
 
 # FEEL FREE TO EDIT THE TESTS AND MAKE THEM BETTER
 # REMEMBER EDGE CASES!
