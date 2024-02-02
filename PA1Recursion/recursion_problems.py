@@ -1,7 +1,10 @@
 
-def modulus(a, b):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
+def modulus(numerator, divisior):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
     #TODO: remove 'pass' and implement functionality
-    pass
+    quotient = numerator / divisior
+    product = int(quotient) * divisior
+    result = numerator - product
+    return result
 
 
 def how_many(lis1, lis2):
