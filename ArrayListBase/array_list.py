@@ -13,19 +13,23 @@ class NotOrdered(Exception):
 class ArrayList:
     def __init__(self, size):
         self.arr = [0] * size
+        self.size = size
 
     #Time complexity: O(n) - linear time in size of list
     def __str__(self):
         # TODO: remove 'pass' and implement functionality
         return_string = ""
-        for i in range(len(self.arr)):
+        for i in range(self.size):
             return_string += f"{self.arr[i]}, "
         return return_string.rstrip(", ")
 
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value):
         # TODO: remove 'pass' and implement functionality
-        pass
+        for i in range(self.size+1):
+            lst = [i:]
+
+
 
 
     #Time complexity: O(n) - linear time in size of list
