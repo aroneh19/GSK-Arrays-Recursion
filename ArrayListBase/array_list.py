@@ -26,16 +26,24 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value):
         # TODO: remove 'pass' and implement functionality
-        for i in range(self.size+1):
-            lst = [i:]
-
+        pass
 
 
 
     #Time complexity: O(n) - linear time in size of list
-    def insert(self, value, index):
-        new_list = []
-        
+    def insert(self, value, index: int):
+        self.size += 1
+        new_list = [0] * (self.size)
+
+        for i in range(self.size):
+            if i == index:
+                new_list[i] = value
+            elif i < index:
+                new_list[i] = self.arr[i]
+            else:
+                new_list[i] = self.arr[i - 1]
+        self.arr = new_list
+
 
     #Time complexity: O(1) - constant time
     def append(self, value):
