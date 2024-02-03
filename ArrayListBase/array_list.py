@@ -17,13 +17,16 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     def __str__(self):
         # TODO: remove 'pass' and implement functionality
-        return_string = self.arr.join(", ")
-        return return_string
+        return_string = ""
+        for i in self.arr:
+            return_string += f"{i}, "
+        return return_string.rstrip()
 
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value):
         # TODO: remove 'pass' and implement functionality
         pass
+
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index):
@@ -88,10 +91,10 @@ class ArrayList:
 
 
 if __name__ == "__main__":
-    pass
+
     # add your tests here or in a different file.
     # Do not add them outside this if statement
     # and make sure they are at this indent level
 
-    arr_lis = ArrayList()
+    arr_lis = ArrayList(6)
     print(str(arr_lis))
