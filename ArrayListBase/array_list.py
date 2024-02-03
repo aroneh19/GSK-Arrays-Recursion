@@ -34,8 +34,8 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index):
-        # TODO: remove 'pass' and implement functionality
-        pass
+        new_list = []
+        
 
     #Time complexity: O(1) - constant time
     def append(self, value):
