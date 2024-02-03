@@ -11,14 +11,16 @@ class NotOrdered(Exception):
     pass
 
 class ArrayList:
-    def __init__(self, size):
-        self.arr = [0] * size
-        self.size = size
+    def __init__(self):
+        self.size = 0
+        self.capacity = 4
+        self.arr = [None] * self.capacity
 
     #Time complexity: O(n) - linear time in size of list
     def __str__(self):
+        # TODO: remove 'pass' and implement functionality
         return_string = ""
-        for i in range(self.size):
+        for i in range(self.size -1):
             return_string += f"{self.arr[i]}, "
         return return_string.rstrip(", ")
 
@@ -79,7 +81,11 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def resize(self):
-        
+        self.capacity = self.capacity * 2
+        tmp_arr = [None] * self.capacity
+        for i in range(self.size):
+            tmp_arr[i] = self.arr[i]
+        self.arr = tmp_arr
 
     #Time complexity: O(n) - linear time in size of list
     def remove_at(self, index):
