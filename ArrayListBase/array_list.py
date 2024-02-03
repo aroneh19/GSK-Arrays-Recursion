@@ -20,7 +20,7 @@ class ArrayList:
         return_string = ""
         for i in self.arr:
             return_string += f"{i}, "
-        return return_string.rstrip()
+        return return_string.rstrip(", ")
 
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value):
