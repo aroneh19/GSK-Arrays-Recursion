@@ -17,7 +17,6 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def __str__(self):
-        # TODO: remove 'pass' and implement functionality
         return_string = ""
         for i in range(self.size):
             return_string += f"{self.arr[i]}, "
@@ -55,7 +54,7 @@ class ArrayList:
                 new_list[-1] = value
             else:
                 new_list[i] = self.arr[i]
-
+        
         self.arr = new_list
 
     #Time complexity: O(1) - constant time
@@ -80,8 +79,7 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def resize(self):
-        # TODO: remove 'pass' and implement functionality
-        pass
+        
 
     #Time complexity: O(n) - linear time in size of list
     def remove_at(self, index):
