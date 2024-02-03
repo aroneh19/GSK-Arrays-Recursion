@@ -18,8 +18,8 @@ class ArrayList:
     def __str__(self):
         # TODO: remove 'pass' and implement functionality
         return_string = ""
-        for i in self.arr:
-            return_string += f"{i}, "
+        for i in range(len(self.arr)):
+            return_string += f"{self.arr[i]}, "
         return return_string.rstrip(", ")
 
     #Time complexity: O(n) - linear time in size of list
