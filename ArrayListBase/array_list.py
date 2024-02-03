@@ -28,13 +28,11 @@ class ArrayList:
         if self.size + 1 > self.capacity:
             self.resize()
         
-        for i in range(self.size - 1, -1, -1):
+        for i in range(self.capacity - 1, -1, -1):
             self.arr[i + 1] = self.arr[i]    
         
         self.arr[0] = value
         self.size += 1
-
-
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index: int):
@@ -49,7 +47,6 @@ class ArrayList:
             else:
                 new_list[i] = self.arr[i - 1]
         self.arr = new_list
-
 
     #Time complexity: O(1) - constant time
     def append(self, value):
@@ -114,11 +111,7 @@ class ArrayList:
 
 
 if __name__ == "__main__":
-
-    # add your tests here or in a different file.
-    # Do not add them outside this if statement
-    # and make sure they are at this indent level
-
     arr_lis = ArrayList()
-    arr_lis.prepend(6)
+    arr_lis.append(6)
+    arr_lis.append(4)
     print(str(arr_lis))
