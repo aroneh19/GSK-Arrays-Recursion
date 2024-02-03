@@ -47,8 +47,16 @@ class ArrayList:
 
     #Time complexity: O(1) - constant time
     def append(self, value):
-        # TODO: remove 'pass' and implement functionality
-        pass
+        self.size += 1
+        new_list = [0] * (self.size)
+
+        for i in range(self.size):
+            if i == self.size - 1:
+                new_list[-1] = value
+            else:
+                new_list[i] = self.arr[i]
+
+        self.arr = new_list
 
     #Time complexity: O(1) - constant time
     def set_at(self, value, index):
@@ -109,4 +117,5 @@ if __name__ == "__main__":
     # and make sure they are at this indent level
 
     arr_lis = ArrayList(6)
+    arr_lis.append(6)
     print(str(arr_lis))
