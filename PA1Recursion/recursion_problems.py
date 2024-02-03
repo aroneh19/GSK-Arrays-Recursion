@@ -13,9 +13,6 @@ def how_many(lis1, lis2):
             result += 1
     return result
 
-    # result = sum(1 for i in list1 if i in list2)
-    # return result
-
 # FEEL FREE TO EDIT THE TESTS AND MAKE THEM BETTER
 # REMEMBER EDGE CASES!
 

@@ -11,14 +11,13 @@ class NotOrdered(Exception):
     pass
 
 class ArrayList:
-    def __init__(self):
-        # TODO: remove 'pass' and implement functionality
-        pass
+    def __init__(self, size):
+        self.arr = [0] * size
 
     #Time complexity: O(n) - linear time in size of list
     def __str__(self):
         # TODO: remove 'pass' and implement functionality
-        return_string = ""
+        return_string = self.arr.join(", ")
         return return_string
 
     #Time complexity: O(n) - linear time in size of list
