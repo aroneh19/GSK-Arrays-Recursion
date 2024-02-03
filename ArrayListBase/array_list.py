@@ -81,8 +81,8 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def resize(self):
-        self.capacity = self.capacity * 2
-        tmp_arr = [None] * self.capacity
+        self.capacity *= 2
+        tmp_arr = [0] * self.capacity
         for i in range(self.size):
             tmp_arr[i] = self.arr[i]
         self.arr = tmp_arr
