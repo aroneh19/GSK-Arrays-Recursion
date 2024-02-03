@@ -14,13 +14,12 @@ class ArrayList:
     def __init__(self):
         self.size = 0
         self.capacity = 4
-        self.arr = [None] * self.capacity
+        self.arr = [0] * self.capacity
 
     #Time complexity: O(n) - linear time in size of list
     def __str__(self):
-        # TODO: remove 'pass' and implement functionality
         return_string = ""
-        for i in range(self.size -1):
+        for i in range(self.size):
             return_string += f"{self.arr[i]}, "
         return return_string.rstrip(", ")
 
@@ -28,11 +27,12 @@ class ArrayList:
     def prepend(self, value):
         if self.size + 1 > self.capacity:
             self.resize()
-        self.size += 1
         
-        for i in range(self.size):
-            self.arr[i] = self.arr[i + 1]    
+        for i in range(self.size - 1, -1, -1):
+            self.arr[i + 1] = self.arr[i]    
+        
         self.arr[0] = value
+        self.size += 1
 
 
 
@@ -119,6 +119,6 @@ if __name__ == "__main__":
     # Do not add them outside this if statement
     # and make sure they are at this indent level
 
-    arr_lis = ArrayList(6)
-    arr_lis.append(6)
+    arr_lis = ArrayList()
+    arr_lis.prepend(6)
     print(str(arr_lis))
