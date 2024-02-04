@@ -66,8 +66,8 @@ class ArrayList:
 
     #Time complexity: O(1) - constant time
     def get_first(self):
-        # TODO: remove 'pass' and implement functionality
-        pass
+        first_value = self.arr[0]
+        return first_value
 
     #Time complexity: O(1) - constant time
     def get_at(self, index):
