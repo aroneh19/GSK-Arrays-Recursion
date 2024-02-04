@@ -25,34 +25,38 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value):
-        if self.size + 1 > self.capacity:
-            self.resize()
-        
+        self.resize()
         for i in range(self.capacity - 1, -1, -1):
-            self.arr[i + 1] = self.arr[i]    
-        
-        self.arr[0] = value
-        self.size += 1
+            self.arr[i + 1] = self.arr[i]
+        self.add_to_array(0, value)
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index: int):
-        self.size += 1
-        new_list = [0] * (self.size)
+        if index < 0 or index > self.capacity:
+            raise IndexError("Inde out of bounds")
 
+        self.resize()
         for i in range(self.size):
-            if i == index:
-                new_list[i] = value
-            elif i < index:
-                new_list[i] = self.arr[i]
-            else:
-                new_list[i] = self.arr[i - 1]
-        self.arr = new_list
+            if i >= index:
+                self.arr[i] = self.arr[i - 1]
+        self.add_to_array(index, value)
+
+        # for i in range(self.size):
+        #     if i == index:
+        #         new_list[i] = value
+        #     elif i < index:
+        #         new_list[i] = self.arr[i]
+        #     else:
+        #         new_list[i] = self.arr[i - 1]
+        # self.arr = new_list
 
     #Time complexity: O(1) - constant time
     def append(self, value):
-        if self.size + 1 > self.capacity:
-            self.resize()
-        self.arr[self.size] = value
+        self.resize()
+        self.add_to_array(self.size, value)
+
+    def add_to_array(self, index, value):
+        self.arr[index] = value
         self.size += 1
 
     #Time complexity: O(1) - constant time
@@ -75,13 +79,15 @@ class ArrayList:
         # TODO: remove 'pass' and implement functionality
         pass
 
+
     #Time complexity: O(n) - linear time in size of list
     def resize(self):
-        self.capacity *= 2
-        tmp_arr = [0] * self.capacity
-        for i in range(self.size):
-            tmp_arr[i] = self.arr[i]
-        self.arr = tmp_arr
+        if self.size + 1 > self.capacity:
+            self.capacity *= 2
+            tmp_arr = [0] * self.capacity
+            for i in range(self.size):
+                tmp_arr[i] = self.arr[i]
+            self.arr = tmp_arr
 
     #Time complexity: O(n) - linear time in size of list
     def remove_at(self, index):
@@ -90,8 +96,9 @@ class ArrayList:
 
     #Time complexity: O(1) - constant time
     def clear(self):
-        # TODO: remove 'pass' and implement functionality
-        pass
+        self.size = 0
+        self.capacity = 4
+        self.arr = [0] * self.capacity
 
     #Time complexity: O(n) - linear time in size of list
     def insert_ordered(self, value):
@@ -109,9 +116,8 @@ class ArrayList:
         # TODO: remove 'pass' and implement functionality
         pass
 
-
 if __name__ == "__main__":
     arr_lis = ArrayList()
-    arr_lis.append(6)
-    arr_lis.append(4)
+    arr_lis.insert(6, 1)
+    arr_lis.insert(4, 1)
     print(str(arr_lis))
