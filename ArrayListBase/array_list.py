@@ -76,15 +76,15 @@ class ArrayList:
 
     #Time complexity: O(1) - constant time
     def get_last(self):
-        # TODO: remove 'pass' and implement functionality
-        pass
-
+        last_value = self.arr[self.size - 1]
+        return last_value
 
     #Time complexity: O(n) - linear time in size of list
     def resize(self):
         if self.size + 1 > self.capacity:
             self.capacity *= 2
             tmp_arr = [0] * self.capacity
+
             for i in range(self.size):
                 tmp_arr[i] = self.arr[i]
             self.arr = tmp_arr
