@@ -40,7 +40,7 @@ class ArrayList:
     def insert(self, value, index: int):
         self.capacity_check()
 
-        if index < 0 or index > self.size:
+        if index < 0 or index > self.capacity:
             raise IndexOutOfBounds()
 
         for i in range(self.size - 1, index - 1, -1):
@@ -48,7 +48,6 @@ class ArrayList:
 
         self.arr[index] = value
         self.size += 1
-
 
 
     # Time complexity: O(1) - constant time
@@ -59,7 +58,7 @@ class ArrayList:
 
     # Time complexity: O(1) - constant time
     def set_at(self, value, index):
-        if index < 0 or index > self.size:
+        if index < 0 or index > self.capacity:
             raise IndexOutOfBounds()
 
         self.arr[index] = value
@@ -73,7 +72,7 @@ class ArrayList:
 
     # Time complexity: O(1) - constant time
     def get_at(self, index):
-        if index < 0 or index > self.size:
+        if index < 0 or index > self.capacity:
             raise IndexOutOfBounds()
         else:
             return self.arr[index]
@@ -100,7 +99,6 @@ class ArrayList:
             for i in range(index, self.size -1):
                 self.arr[i] = self.arr[i + 1]
         self.size -= 1
-
 
     # Time complexity: O(1) - constant time
     def clear(self):
@@ -137,5 +135,4 @@ if __name__ == "__main__":
     print(str(arr_lis))
     print(arr_lis.get_last())
     arr_lis.remove_at(6)
-    print(arr_lis)
-
+    print(str(arr_lis))

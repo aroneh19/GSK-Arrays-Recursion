@@ -33,7 +33,7 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index: int):
         if index < 0 or index > self.capacity:
-            raise IndexError("Inde out of bounds")
+            raise IndexError("Index out of bounds")
 
         self.resize()
         for i in range(self.size):
