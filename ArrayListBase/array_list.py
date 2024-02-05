@@ -65,10 +65,11 @@ class ArrayList:
         """Get the first element of the ArrayList.
 
         Time complexity: O(1) - constant time
-        """
-        if self.size > 0:
+        """    
+        try:
             return self.arr[0]
-        raise Empty()
+        except IndexError:
+            raise Empty()
 
     def get_at(self, index):
         """Get the value at a specified index in the ArrayList.
@@ -83,9 +84,10 @@ class ArrayList:
 
         Time complexity: O(1) - constant time
         """
-        if self.size > 0:
+        try:
             return self.arr[self.size - 1]
-        raise Empty()
+        except IndexError:
+            raise Empty()
 
     def resize(self):
         """Resize the ArrayList if the size exceeds the capacity.
@@ -126,11 +128,13 @@ class ArrayList:
         """
         if not self.order_check():
             raise NotOrdered("Array is not ordered")
+
         index = 0
         for i in range(self.size):
             if self.arr[i] >= value:
                 break
             index += 1
+
         self.insert(value, index)
 
     def find(self, value):
@@ -163,13 +167,14 @@ class ArrayList:
 
         Time complexity: O(n) - linear time in size of list
         """
-        if not new_list:
+        try:
+            head = new_list[0]
+            tail = new_list[1:]
+            if head == value:
+                return index
+            return self.linear_search(tail, value, index + 1)
+        except IndexError:
             raise NotFound("Value not found in list")
-        head = new_list[0]
-        tail = new_list[1:]
-        if head == value:
-            return index
-        return self.linear_search(tail, value, index + 1)
 
     def remove_value(self, value):
         """Remove the first occurrence of a specified value from the ArrayList.

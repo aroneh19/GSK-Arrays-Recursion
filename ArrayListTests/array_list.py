@@ -67,6 +67,8 @@ class ArrayList:
         Time complexity: O(1) - constant time
         """    
         try:
+            if self.size == 0:
+                raise IndexError()
             return self.arr[0]
         except IndexError:
             raise Empty()
@@ -84,9 +86,12 @@ class ArrayList:
 
         Time complexity: O(1) - constant time
         """
-        if self.size > 0:
+        try:
+            if self.size == 0:
+                raise IndexError()
             return self.arr[self.size - 1]
-        raise Empty()
+        except IndexError:
+            raise Empty()
 
     def resize(self):
         """Resize the ArrayList if the size exceeds the capacity.
@@ -127,11 +132,13 @@ class ArrayList:
         """
         if not self.order_check():
             raise NotOrdered("Array is not ordered")
+
         index = 0
         for i in range(self.size):
             if self.arr[i] >= value:
                 break
             index += 1
+
         self.insert(value, index)
 
     def find(self, value):
@@ -207,10 +214,5 @@ class ArrayList:
 
 if __name__ == "__main__":
     arr_lis = ArrayList()
-    arr_lis.append(5)
-    arr_lis.append(2)
-    arr_lis.append(3)
-    arr_lis.append(4)
-    arr_lis.append(1)
-    print(arr_lis.find(6))
+    print(arr_lis.get_last())
     print(str(arr_lis))
