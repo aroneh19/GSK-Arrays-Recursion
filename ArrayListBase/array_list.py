@@ -110,34 +110,38 @@ class ArrayList:
                 validator = False
                 break
         if validator:
-            self.binary_search(value)
+            self.binary_search(self.arr, 0, self.size - 1, value)
         else:
-            self.linear_search(value)
+            self.linear_search(self.arr, value)
     
-    def binary_search(self, arr, low, high, x):
+    def binary_search(self, arr, low, high, value):
         if high >= low:
             mid = (high + low) // 2
 
-            if arr[mid] == x:
+            if arr[mid] == value:
                 return mid
-
-            elif arr[mid] > x:
-                return self.binary_search(arr, low, mid - 1, x)
-
+            elif arr[mid] > value:
+                return self.binary_search(arr, low, mid - 1, value)
             else:
-                return self.binary_search(arr, mid, high + 1, x)
+                return self.binary_search(arr, mid, high + 1, value)
         return None
 
-    def linear_search(self, value):
-        pass
-
+    def linear_search(self, my_list, value):
+        if my_list == []:
+            return False
+        head = my_list[0]
+        tail = my_list[1:]
+        if head == value:
+            return True
+        return self.linear_search(tail, value)
+        
     #Time complexity: O(n) - linear time in size of list
     def remove_value(self, value):
         # TODO: remove 'pass' and implement functionality
         pass
 
     def check_index(self, index):
-        if index < 0 or index + 1 > self.size:
+        if index < 0 or index > self.size:
             raise IndexOutOfBounds()
         return True
     
@@ -153,4 +157,5 @@ if __name__ == "__main__":
     arr_lis.prepend(2)
     arr_lis.insert(6, 0)
     arr_lis.insert(4, 3)
+    arr_lis.find(6)
     print(str(arr_lis))
