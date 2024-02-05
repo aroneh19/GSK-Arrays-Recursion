@@ -32,7 +32,7 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index: int):
-        self.check_index(index)
+        self.check_index(index, 1)
         self.resize()
         for i in range(self.size - 1, index - 1, -1):
             self.arr[i + 1] = self.arr[i]
@@ -140,8 +140,8 @@ class ArrayList:
         index = self.find(value)
         self.remove_at(index)
 
-    def check_index(self, index):
-        if index < 0 or index >= self.size:
+    def check_index(self, index, insert=0):
+        if index < 0 or index >= (self.size + insert):
             raise IndexOutOfBounds("Index is out of bounds")
         return True
     
@@ -153,10 +153,10 @@ class ArrayList:
 
 if __name__ == "__main__":
     arr_lis = ArrayList()
-    arr_lis.append(5)
-    arr_lis.append(2)
-    arr_lis.append(3)
-    arr_lis.append(4)
-    arr_lis.append(1)
-    arr_lis.remove_value(5)
+    arr_lis.prepend(99)
+    print(arr_lis.get_last())
+    arr_lis.append(27)
+    arr_lis.insert(33, 1)
+    arr_lis.insert(41, 3)
+    print(arr_lis.get_at(4))
     print(str(arr_lis))
