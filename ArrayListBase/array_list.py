@@ -26,7 +26,7 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value):
         self.resize()
-        for i in range(self.capacity - 1, -1, -1):
+        for i in range(self.size - 1, -1, -1):
             self.arr[i + 1] = self.arr[i]
         self.add_to_array(0, value)
 
@@ -110,10 +110,26 @@ class ArrayList:
                 validator = False
                 break
         if validator:
-            pass
+            self.binary_search(value)
         else:
-            pass
+            self.linear_search(value)
+    
+    def binary_search(self, arr, low, high, x):
+        if high >= low:
+            mid = (high + low) // 2
 
+            if arr[mid] == x:
+                return mid
+
+            elif arr[mid] > x:
+                return self.binary_search(arr, low, mid - 1, x)
+
+            else:
+                return self.binary_search(arr, mid, high + 1, x)
+        return None
+
+    def linear_search(self, value):
+        pass
 
     #Time complexity: O(n) - linear time in size of list
     def remove_value(self, value):
@@ -121,9 +137,9 @@ class ArrayList:
         pass
 
     def check_index(self, index):
-        if index < 0 or index > self.size:
+        if index < 0 or index + 1 > self.size:
             raise IndexOutOfBounds()
-        else: return True 
+        return True
     
     def order_check(self):
         for i in range(self.size - 1):
@@ -134,6 +150,7 @@ class ArrayList:
 if __name__ == "__main__":
     arr_lis = ArrayList()
     arr_lis.append(1)
+    arr_lis.prepend(2)
     arr_lis.insert(6, 0)
-    arr_lis.insert(4, 8)
+    arr_lis.insert(4, 3)
     print(str(arr_lis))
