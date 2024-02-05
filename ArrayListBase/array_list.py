@@ -32,23 +32,11 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index: int):
-        if index < 0 or index > self.capacity:
-            raise IndexError("Index out of bounds")
-
+        self.check_index(index)
         self.resize()
-        for i in range(self.size):
-            if i >= index:
-                self.arr[i] = self.arr[i - 1]
+        for i in range(self.size - 1, index - 1, -1):
+            self.arr[i + 1] = self.arr[i]
         self.add_to_array(index, value)
-
-        # for i in range(self.size):
-        #     if i == index:
-        #         new_list[i] = value
-        #     elif i < index:
-        #         new_list[i] = self.arr[i]
-        #     else:
-        #         new_list[i] = self.arr[i - 1]
-        # self.arr = new_list
 
     #Time complexity: O(1) - constant time
     def append(self, value):
@@ -61,8 +49,8 @@ class ArrayList:
 
     #Time complexity: O(1) - constant time
     def set_at(self, value, index):
-        # TODO: remove 'pass' and implement functionality
-        pass
+        self.check_index(index)
+        self.arr[index] = value
 
     #Time complexity: O(1) - constant time
     def get_first(self):
@@ -71,8 +59,8 @@ class ArrayList:
 
     #Time complexity: O(1) - constant time
     def get_at(self, index):
-        # TODO: remove 'pass' and implement functionality
-        pass
+        self.check_index(index)
+        return self.arr[index]
 
     #Time complexity: O(1) - constant time
     def get_last(self):
@@ -91,8 +79,10 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def remove_at(self, index):
-        # TODO: remove 'pass' and implement functionality
-        pass
+        self.check_index(index)
+        for i in range(index, self.size -1):
+            self.arr[i] = self.arr[i + 1]
+        self.size -= 1
 
     #Time complexity: O(1) - constant time
     def clear(self):
@@ -108,16 +98,31 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     #Time complexity: O(log n) - logarithmic time in size of list
     def find(self, value):
-        # TODO: remove 'pass' and implement functionality
-        pass
+        for i in range(self.size - 1):
+            if self.arr[i] <= self.arr[i + 1]:
+                validator = True
+            else:
+                validator = False
+                break
+        if validator:
+            pass
+        else:
+            pass
+
 
     #Time complexity: O(n) - linear time in size of list
     def remove_value(self, value):
         # TODO: remove 'pass' and implement functionality
         pass
 
+    def check_index(self, index):
+        if index < 0 or index > self.size:
+            raise IndexOutOfBounds()
+        else: return True 
+
 if __name__ == "__main__":
     arr_lis = ArrayList()
-    arr_lis.insert(6, 1)
-    arr_lis.insert(4, 1)
+    arr_lis.append(1)
+    arr_lis.insert(6, 0)
+    arr_lis.insert(4, 8)
     print(str(arr_lis))
