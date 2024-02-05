@@ -92,8 +92,13 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def insert_ordered(self, value):
-        # TODO: remove 'pass' and implement functionality
-        pass
+        if not self.order_check():
+            raise NotOrdered()
+        index = 0
+        for i in range(self.size):
+            if self.arr[i] >= value:
+                break
+            index += 1
 
     #Time complexity: O(n) - linear time in size of list
     #Time complexity: O(log n) - logarithmic time in size of list
@@ -119,6 +124,12 @@ class ArrayList:
         if index < 0 or index > self.size:
             raise IndexOutOfBounds()
         else: return True 
+    
+    def order_check(self):
+        for i in range(self.size - 1):
+            if self.arr[i] > self.arr[i + 1]:
+                return False
+        return True
 
 if __name__ == "__main__":
     arr_lis = ArrayList()
