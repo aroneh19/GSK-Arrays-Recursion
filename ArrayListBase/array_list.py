@@ -110,9 +110,9 @@ class ArrayList:
                 validator = False
                 break
         if validator:
-            self.binary_search(self.arr, 0, self.size - 1, value)
+            print(self.binary_search(self.arr, 0, self.size - 1, value))
         else:
-            self.linear_search(self.arr, value)
+            print(self.linear_search(self.arr, value))
     
     def binary_search(self, arr, low, high, value):
         if high >= low:
@@ -154,8 +154,9 @@ class ArrayList:
 if __name__ == "__main__":
     arr_lis = ArrayList()
     arr_lis.append(1)
-    arr_lis.prepend(2)
-    arr_lis.insert(6, 0)
-    arr_lis.insert(4, 3)
-    arr_lis.find(6)
+    arr_lis.append(2)
+    arr_lis.append(3)
+    arr_lis.append(4)
+    arr_lis.append(5)
+    print(arr_lis.get_at(5))
     print(str(arr_lis))
