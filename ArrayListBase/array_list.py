@@ -28,7 +28,7 @@ class ArrayList:
         self.resize()
         for i in range(self.size - 1, -1, -1):
             self.arr[i + 1] = self.arr[i]
-        self.add_to_array(0, value)
+        self.insert_to_array(0, value)
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index: int):
@@ -36,14 +36,14 @@ class ArrayList:
         self.resize()
         for i in range(self.size - 1, index - 1, -1):
             self.arr[i + 1] = self.arr[i]
-        self.add_to_array(index, value)
+        self.insert_to_array(index, value)
 
     #Time complexity: O(1) - constant time
     def append(self, value):
         self.resize()
-        self.add_to_array(self.size, value)
+        self.insert_to_array(self.size, value)
 
-    def add_to_array(self, index, value):
+    def insert_to_array(self, index, value):
         self.arr[index] = value
         self.size += 1
 
@@ -54,8 +54,9 @@ class ArrayList:
 
     #Time complexity: O(1) - constant time
     def get_first(self):
-        first_value = self.arr[0]
-        return first_value
+        if self.size > 0:
+            return self.arr[0]
+        raise Empty()
 
     #Time complexity: O(1) - constant time
     def get_at(self, index):
@@ -64,8 +65,9 @@ class ArrayList:
 
     #Time complexity: O(1) - constant time
     def get_last(self):
-        last_value = self.arr[self.size - 1]
-        return last_value
+        if self.size > 0:
+            return self.arr[self.size - 1]
+        raise Empty()
 
     #Time complexity: O(n) - linear time in size of list
     def resize(self):
@@ -99,38 +101,30 @@ class ArrayList:
             if self.arr[i] >= value:
                 break
             index += 1
+        self.insert(value, index)
 
     #Time complexity: O(n) - linear time in size of list
     #Time complexity: O(log n) - logarithmic time in size of list
     def find(self, value):
-        for i in range(self.size - 1):
-            if self.arr[i] <= self.arr[i + 1]:
-                validator = True
-            else:
-                validator = False
-                break
-        if validator:
+        if self.order_check():
             return self.binary_search(self.arr, 0, self.size - 1, value)
-        else:
-            return self.linear_search(self.arr, value, 0)
-    
+        return self.linear_search(self.arr, value, 0)
+
     def binary_search(self, arr, low, high, value):
         if high >= low:
             mid = (high + low) // 2
-
             if arr[mid] == value:
                 return mid
             elif arr[mid] > value:
                 return self.binary_search(arr, low, mid - 1, value)
-            else:
-                return self.binary_search(arr, mid, high + 1, value)
-        return None
+            return self.binary_search(arr, mid + 1, high, value)
+        raise NotFound("Value not found in list")
 
-    def linear_search(self, my_list, value, index):
-        if my_list == []:
-            return False
-        head = my_list[0]
-        tail = my_list[1:]
+    def linear_search(self, new_list, value, index):
+        if not new_list:
+            raise NotFound("Value not found in list")
+        head = new_list[0]
+        tail = new_list[1:]
         if head == value:
             return index
         return self.linear_search(tail, value, index + 1)
@@ -153,10 +147,4 @@ class ArrayList:
 
 if __name__ == "__main__":
     arr_lis = ArrayList()
-    arr_lis.prepend(99)
-    print(arr_lis.get_last())
-    arr_lis.append(27)
-    arr_lis.insert(33, 1)
-    arr_lis.insert(41, 3)
-    print(arr_lis.get_at(4))
     print(str(arr_lis))

@@ -28,7 +28,7 @@ class ArrayList:
         self.resize()
         for i in range(self.size - 1, -1, -1):
             self.arr[i + 1] = self.arr[i]
-        self.add_to_array(0, value)
+        self.insert_to_array(0, value)
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index: int):
@@ -36,14 +36,14 @@ class ArrayList:
         self.resize()
         for i in range(self.size - 1, index - 1, -1):
             self.arr[i + 1] = self.arr[i]
-        self.add_to_array(index, value)
+        self.insert_to_array(index, value)
 
     #Time complexity: O(1) - constant time
     def append(self, value):
         self.resize()
-        self.add_to_array(self.size, value)
+        self.insert_to_array(self.size, value)
 
-    def add_to_array(self, index, value):
+    def insert_to_array(self, index, value):
         self.arr[index] = value
         self.size += 1
 
@@ -56,8 +56,7 @@ class ArrayList:
     def get_first(self):
         if self.size > 0:
             return self.arr[0]
-        else:
-            raise Empty()
+        raise Empty()
 
     #Time complexity: O(1) - constant time
     def get_at(self, index):
@@ -68,8 +67,7 @@ class ArrayList:
     def get_last(self):
         if self.size > 0:
             return self.arr[self.size - 1]
-        else:
-            raise Empty()
+        raise Empty()
 
     #Time complexity: O(n) - linear time in size of list
     def resize(self):
@@ -109,30 +107,27 @@ class ArrayList:
     #Time complexity: O(log n) - logarithmic time in size of list
     def find(self, value):
         if self.order_check():
-            return self.binary_search(0, self.size - 1, value)
-        return self.linear_search(value, 0)
+            return self.binary_search(self.arr, 0, self.size - 1, value)
+        return self.linear_search(self.arr, value, 0)
 
-    
-    def binary_search(self, low, high, value):
+    def binary_search(self, arr, low, high, value):
         if high >= low:
             mid = (high + low) // 2
-
-            if self.arr[mid] == value:
+            if arr[mid] == value:
                 return mid
-            elif self.arr[mid] > value:
-                return self.binary_search(low, mid + 1, value)
-            else:
-                return self.binary_search(mid - 1, high, value)
-        return None
+            elif arr[mid] > value:
+                return self.binary_search(arr, low, mid - 1, value)
+            return self.binary_search(arr, mid + 1, high, value)
+        raise NotFound("Value not found in list")
 
-    def linear_search(self, value, index):
-        if self.arr == []:
+    def linear_search(self, new_list, value, index):
+        if not new_list:
             raise NotFound("Value not found in list")
-        head = self.arr[0]
-        tail = self.arr[1:]
+        head = new_list[0]
+        tail = new_list[1:]
         if head == value:
             return index
-        return self.linear_search(tail, index + 1)
+        return self.linear_search(tail, value, index + 1)
         
     #Time complexity: O(n) - linear time in size of list
     def remove_value(self, value):
@@ -152,8 +147,4 @@ class ArrayList:
 
 if __name__ == "__main__":
     arr_lis = ArrayList()
-    list1 = [10, 11, 12, 13, 13, 13, 14, 15, 15, 16, 18, 18, 18, 19, 21, 21, 22, 22, 23, 23, 24, 24, 25, 27, 28, 28, 28, 29, 29, 29, 29, 30]
-    for i in list1:
-        arr_lis.append(i)
-    print(arr_lis.find(13))
     print(str(arr_lis))
