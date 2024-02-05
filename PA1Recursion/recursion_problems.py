@@ -1,17 +1,22 @@
 
-def modulus(numerator, divisior):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
-    quotient = numerator / divisior
-    product = int(quotient) * divisior
-    result = numerator - product
+def modulus(numerator, divisor):
+    if numerator < divisor:
+        return numerator
+    result = modulus(numerator - divisor, divisor)
     return result
 
 
 def how_many(lis1, lis2):
-    result = 0
-    for i in lis1:
-        if i in lis2:
-            result += 1
-    return result
+    if lis1 == [] or lis2 == []:
+        return 0
+    head_1 = lis1[0]
+    tail_1 = lis1[1:]
+    head_2 = lis2[0]
+    tail_2 = lis2[1:]
+    if head_1 == head_2:
+        return 1 + how_many(tail_1, tail_2)
+    else:
+        return how_many(tail_1, lis2) + how_many(lis1, tail_2)
 
 # FEEL FREE TO EDIT THE TESTS AND MAKE THEM BETTER
 # REMEMBER EDGE CASES!
