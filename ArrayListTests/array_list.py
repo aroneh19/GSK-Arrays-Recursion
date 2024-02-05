@@ -65,10 +65,11 @@ class ArrayList:
         """Get the first element of the ArrayList.
 
         Time complexity: O(1) - constant time
-        """
-        if self.size > 0:
+        """    
+        try:
             return self.arr[0]
-        raise Empty()
+        except IndexError:
+            raise Empty()
 
     def get_at(self, index):
         """Get the value at a specified index in the ArrayList.
@@ -163,13 +164,14 @@ class ArrayList:
 
         Time complexity: O(n) - linear time in size of list
         """
-        if not new_list:
+        try:
+            head = new_list[0]
+            tail = new_list[1:]
+            if head == value:
+                return index
+            return self.linear_search(tail, value, index + 1)
+        except IndexError:
             raise NotFound("Value not found in list")
-        head = new_list[0]
-        tail = new_list[1:]
-        if head == value:
-            return index
-        return self.linear_search(tail, value, index + 1)
 
     def remove_value(self, value):
         """Remove the first occurrence of a specified value from the ArrayList.
@@ -205,4 +207,10 @@ class ArrayList:
 
 if __name__ == "__main__":
     arr_lis = ArrayList()
+    arr_lis.append(5)
+    arr_lis.append(2)
+    arr_lis.append(3)
+    arr_lis.append(4)
+    arr_lis.append(1)
+    print(arr_lis.find(6))
     print(str(arr_lis))
