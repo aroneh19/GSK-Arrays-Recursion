@@ -93,7 +93,7 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     def insert_ordered(self, value):
         if not self.order_check():
-            raise NotOrdered()
+            raise NotOrdered("Array is not ordered")
         index = 0
         for i in range(self.size):
             if self.arr[i] >= value:
@@ -110,9 +110,9 @@ class ArrayList:
                 validator = False
                 break
         if validator:
-            print(self.binary_search(self.arr, 0, self.size - 1, value))
+            return self.binary_search(self.arr, 0, self.size - 1, value)
         else:
-            print(self.linear_search(self.arr, value))
+            return self.linear_search(self.arr, value, 0)
     
     def binary_search(self, arr, low, high, value):
         if high >= low:
@@ -126,23 +126,23 @@ class ArrayList:
                 return self.binary_search(arr, mid, high + 1, value)
         return None
 
-    def linear_search(self, my_list, value):
+    def linear_search(self, my_list, value, index):
         if my_list == []:
             return False
         head = my_list[0]
         tail = my_list[1:]
         if head == value:
-            return True
-        return self.linear_search(tail, value)
+            return index
+        return self.linear_search(tail, value, index + 1)
         
     #Time complexity: O(n) - linear time in size of list
     def remove_value(self, value):
-        # TODO: remove 'pass' and implement functionality
-        pass
+        index = self.find(value)
+        self.remove_at(index)
 
     def check_index(self, index):
-        if index < 0 or index > self.size:
-            raise IndexOutOfBounds()
+        if index < 0 or index >= self.size:
+            raise IndexOutOfBounds("Index is out of bounds")
         return True
     
     def order_check(self):
@@ -153,10 +153,10 @@ class ArrayList:
 
 if __name__ == "__main__":
     arr_lis = ArrayList()
-    arr_lis.append(1)
+    arr_lis.append(5)
     arr_lis.append(2)
     arr_lis.append(3)
     arr_lis.append(4)
-    arr_lis.append(5)
-    print(arr_lis.get_at(5))
+    arr_lis.append(1)
+    arr_lis.remove_value(5)
     print(str(arr_lis))
