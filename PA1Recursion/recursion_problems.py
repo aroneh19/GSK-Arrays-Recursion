@@ -9,12 +9,13 @@ def modulus(numerator, divisor):
 def how_many(lis1, lis2):
     if lis1 == [] or lis2 == []:
         return 0
+    
     tail_lis1 = lis1[1:]
+
     if lis1[0] in lis2:
         return 1 + how_many(tail_lis1, lis2)
-    else:
-        return how_many(tail_lis1, lis2)
-
+    
+    return how_many(tail_lis1, lis2)
 
 
 # FEEL FREE TO EDIT THE TESTS AND MAKE THEM BETTER
