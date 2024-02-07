@@ -20,9 +20,11 @@ class ArrayList:
     def __str__(self):
         """Return a string representation of the ArrayList."""
         return_string = ""
-        for i in range(self.size):
+        for i in range(self.size - 1):
             return_string += f"{self.arr[i]}, "
-        return return_string.rstrip(", ")
+        if self.size > 0:
+            return_string += f"{self.arr[self.size - 1]}"
+        return return_string
 
     def prepend(self, value):
         """Insert a value at the beginning of the ArrayList.
@@ -30,8 +32,10 @@ class ArrayList:
         Time complexity: O(n) - linear time in size of list
         """
         self.resize()
+
         for i in range(self.size - 1, -1, -1):
             self.arr[i + 1] = self.arr[i]
+        
         self.insert_to_array(0, value)
 
     def insert(self, value, index: int):
@@ -41,8 +45,10 @@ class ArrayList:
         """
         self.check_index(index, 1)
         self.resize()
+
         for i in range(self.size - 1, index - 1, -1):
             self.arr[i + 1] = self.arr[i]
+
         self.insert_to_array(index, value)
 
     def append(self, value):
@@ -66,10 +72,9 @@ class ArrayList:
 
         Time complexity: O(1) - constant time
         """    
-        try:
-            return self.arr[0]
-        except IndexError:
+        if self.size == 0:
             raise Empty()
+        return self.arr[0]
 
     def get_at(self, index):
         """Get the value at a specified index in the ArrayList.
@@ -84,10 +89,9 @@ class ArrayList:
 
         Time complexity: O(1) - constant time
         """
-        try:
-            return self.arr[self.size - 1]
-        except IndexError:
+        if self.size == 0:
             raise Empty()
+        return self.arr[self.size - 1]
 
     def resize(self):
         """Resize the ArrayList if the size exceeds the capacity.
@@ -100,6 +104,7 @@ class ArrayList:
 
             for i in range(self.size):
                 tmp_arr[i] = self.arr[i]
+
             self.arr = tmp_arr
 
     def remove_at(self, index):
@@ -108,8 +113,10 @@ class ArrayList:
         Time complexity: O(n) - linear time in size of list
         """
         self.check_index(index)
+
         for i in range(index, self.size -1):
             self.arr[i] = self.arr[i + 1]
+        
         self.size -= 1
 
     def clear(self):
@@ -162,19 +169,21 @@ class ArrayList:
             return self.binary_search(arr, mid + 1, high, value)
         raise NotFound("Value not found in list")
 
-    def linear_search(self, new_list, value, index):
+    def linear_search(self, my_list, value, index):
         """Perform linear search on an unordered list.
 
         Time complexity: O(n) - linear time in size of list
         """
-        try:
-            head = new_list[0]
-            tail = new_list[1:]
-            if head == value:
-                return index
-            return self.linear_search(tail, value, index + 1)
-        except IndexError:
+        if not my_list:
             raise NotFound("Value not found in list")
+        
+        head = my_list[0]
+        tail = my_list[1:]
+
+        if head == value:
+            return index
+        
+        return self.linear_search(tail, value, index + 1)
 
     def remove_value(self, value):
         """Remove the first occurrence of a specified value from the ArrayList.
@@ -196,6 +205,7 @@ class ArrayList:
         """
         if index < 0 or index >= (self.size + insert):
             raise IndexOutOfBounds("Index is out of bounds")
+        
         return True
 
     def order_check(self):

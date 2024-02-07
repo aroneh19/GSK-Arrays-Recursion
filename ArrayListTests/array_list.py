@@ -20,9 +20,11 @@ class ArrayList:
     def __str__(self):
         """Return a string representation of the ArrayList."""
         return_string = ""
-        for i in range(self.size):
+        for i in range(self.size - 1):
             return_string += f"{self.arr[i]}, "
-        return return_string.rstrip(", ")
+        if self.size > 0:
+            return_string += f"{self.arr[self.size - 1]}"
+        return return_string
 
     def prepend(self, value):
         """Insert a value at the beginning of the ArrayList.
